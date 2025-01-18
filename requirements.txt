@@ -1,0 +1,5 @@
+django
+djangorestframework
+django-sonar
+django-allauth
+drf-yasg
