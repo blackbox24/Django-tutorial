@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+    <style>
+        nav{
+            display:flex;
+            justify-content:space-around;
+            background-color: rgb(44, 33, 33);
+            padding: 20px;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+        nav > a {
+            text-decoration: none;
+            font-size: larger;
+            color: rgb(132, 145, 214);
+        }
+        .body-title{
+            display: flex;
+            justify-content: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .body-title-2{
+            display: flex;
+            justify-content: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size:50px;
+        }
+        .main-content{
+            display: block;
+            padding: 20px;
+        }
+        .add-btn{
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#0C9;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            box-shadow: 2px 2px 3px #999;
+        }
+        .invalid-feedback{
+            color:red;
+        }
+        .my-float{
+            margin-top:22px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'blog:index' %}">Home</a>
+        <a href="{% url 'blog:index' %}">Blog</a>
+        <a href="{% url 'account_logout' %}">Logout</a>
+    </nav>
+    <h1 class="body-title">Welcome {{ request.user.username}}</h1>
+    {% block content %}
+    {% endblock %}
+    <a href="{% url 'blog:add-blog' %}" class="add-btn">
+        <i class="fa fa-plus my-float"></i>
+    </a>
+</body>
+</html>

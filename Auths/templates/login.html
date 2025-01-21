@@ -1,0 +1,12 @@
+{% extends "./authbase.html" %}
+
+{% block content %}
+<form action="{% url 'auths:custom-login' %}" method="post">
+{% csrf_token %}
+  {{form.as_p}}
+    <div>
+        <input type="submit" value="submit"/>
+    </div>
+    
+</form>
+{% endblock %}

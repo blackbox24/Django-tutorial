@@ -1,0 +1,18 @@
+{% extends "./../base.html" %}
+{% load static %}
+{% block title %}Test Allauth - index {% endblock %}
+
+{% block content %}
+<div class="main-content">
+    {% if count != 0 %}
+        <ul>
+            {% for blog in blogs %}
+            <li>{{blog.title}}<span> <a href="#" >Read</a></span></li>
+            
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3 class="body-title-2">No blogs found </h3>
+    {% endif %}
+</div>
+{% endblock %}

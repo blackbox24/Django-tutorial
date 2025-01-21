@@ -3,3 +3,4 @@ djangorestframework
 django-sonar
 django-allauth
 drf-yasg
+django-crispy-forms

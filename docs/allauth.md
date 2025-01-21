@@ -7,3 +7,5 @@
 - include allauth urls in root url conf
 - run migrate command
 - run the server
+
+
