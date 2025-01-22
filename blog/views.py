@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Blog
 from .forms import BlogForm
 
+from haystack.views import SearchView
+from haystack.query import SearchQuerySet
 from allauth.account.views import login
 # Using Django Templates
 
@@ -24,3 +26,16 @@ def createBlog(request):
         form = BlogForm()
     template_name = "blog/create.html"
     return render(request,template_name,{"form":form})
+
+class BlogSearchView(SearchView):
+    template = "blog/search.html"
+
+    def extra_content(self):
+        content = super(BlogSearchView,self).extra_context()
+        content["query"] = self.request.GET.get("q","")
+        return content
+
+def search(request):
+    query = request.GET.get("q")
+    results = SearchQuerySet().filter(content=query)
+    return render(request,"blog/search.html",{"pages":results})

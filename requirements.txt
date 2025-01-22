@@ -1,6 +1,8 @@
 django
 djangorestframework
 django-sonar
+pysolr
+whoosh
 django-allauth
 drf-yasg
 django-crispy-forms

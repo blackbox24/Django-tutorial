@@ -1,0 +1,13 @@
+<form action="/search" method="get">
+  <input name="q" type="text" />
+  <input type="submit" />
+</form>
+<ul class="">
+{% for result in page.object_list %}
+  <li>Title : {{ result.object.title }}</li>
+  <li>Description: {{ result.object.description }}</li>
+  <li>Owner: {{ result.object.owner.username }}</li>
+</ul>
+{% empty %}           
+    No results found.
+{% endfor %}
