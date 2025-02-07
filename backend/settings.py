@@ -18,7 +18,7 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,17 +34,24 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap4",
     "haystack",
+    "django_tenants",
 
     # my apps
     "blog",
     "Auths",
 ]
 
+
+TENANT_APPS = ["blog"]
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -85,12 +92,24 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # SQLITE
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE":"django_tenants.postgresql_backend",
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '2001',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
+DATABASE_ROUTERS = (
+    "django_tenants.routers.TenantSyncRouter",
+)
 
+TENANT_MODEL = "blog.Client"
+TENANT_DOMAIN_MODEL = "blog.Domain"
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

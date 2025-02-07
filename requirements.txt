@@ -5,4 +5,7 @@ pysolr
 whoosh
 django-allauth
 drf-yasg
+django-tenants
 django-crispy-forms
+psycopg2-binary
+python-decouple
